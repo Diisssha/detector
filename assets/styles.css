@@ -1,0 +1,440 @@
+/* Общие стили для страницы */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    background-color: #3d348b;
+    mask: url('logo.svg') center / contain;
+    -webkit-mask: url('logo.svg') center / contain;
+}
+
+.title {
+    font-family: 'Georgia', serif;
+    font-size: 24px;
+    color: #000;
+}
+
+.nav span {
+    margin-left: 20px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.main {
+    display: flex;
+    margin: 20px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #3d348b;
+    padding: 10px;
+    color: white;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.card {
+    width: 45%;
+    height: 300px;
+    background-color: #dcd6f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.card h2 {
+    font-size: 18px;
+    color: #3d348b;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #3d348b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-trigger {
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    width: 150px;
+    z-index: 10;
+}
+
+.dropdown-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown {
+    padding-right: 10px;
+}
+
+#adminButton {
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    padding-left: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+#adminButton:hover {
+    background-color: #DCDCDC;
+    transition: .3s;
+}
+
+/* Модальное окно */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    max-width: 800px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #3d348b;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.modal-content th, .modal-content td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.modal-content th {
+    background-color: #dcd6f7;
+    color: #3d348b;
+}
+
+.modal-content td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.modal-content td button:hover {
+    background-color: #3d348b;
+    color: white;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content form .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.modal-content form input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 20px); /* Убираем отступы */
+}
+
+.modal-content form button {
+    padding: 10px;
+    background-color: #3d348b;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: all .3s;
+}
+
+.modal-content form button:hover {
+    background-color: red;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Стили для выпадающего меню с группами */
+#groupSelect {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+#groupSelect:focus {
+    border-color: #3d348b; /* Смена цвета при фокусе */
+    outline: none;
+}
+
+#groupSelect option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+}
+
+#groupSelect option:hover {
+    background-color: #dcd6f7;
+}
+
+/* Общие стили для кнопок */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3d348b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.btn:hover {
+    background-color: #2c2767;
+}
+
+/* Секции внутри модального окна */
+.section {
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    color: #3d348b;
+    margin-bottom: 10px;
+}
+
+/* Таблицы для студентов и групп */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #dcd6f7;
+    color: #3d348b;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+button:hover {
+    background-color: #3d348b;
+    color: white;
+}
+
+/* Формы для добавления/редактирования студентов и групп */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+form input, form select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 20px);
+}
+
+/* Кнопки в формах */
+form button {
+    padding: 10px;
+    background-color: #3d348b;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: all .3s;
+}
+
+form button:hover {
+    background-color: red;
+}
+
+/* Закрытие модального окна */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Стили для выпадающего списка выбора группы */
+#groupFilter {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+/* Стили для фокуса на выпадающем списке */
+#groupFilter:focus {
+    border-color: #3d348b; /* Меняем цвет рамки при фокусе */
+    outline: none;
+}
+
+/* Стили для выпадающих опций */
+#groupFilter option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Стили для опций при наведении */
+#groupFilter option:hover {
+    background-color: #dcd6f7; /* Светло-фиолетовый цвет при наведении */
+}
