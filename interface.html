@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Explorer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>GitHub Explorer</h1>
+
+<div>
+    <input type="text" id="username" placeholder="Введите GitHub username">
+    <button id="load-repos">Загрузить репозитории</button>
+</div>
+
+<div id="repos-container" style="margin-top: 20px;">
+    <h2>Репозитории</h2>
+    <ul id="repos-list"></ul>
+</div>
+
+<div id="files-container" style="margin-top: 20px; display: none;">
+    <h2>Файлы</h2>
+    <ul id="files-list"></ul>
+</div>
+
+<div id="file-content-container" style="margin-top: 20px; display: none;">
+    <h2>Содержимое файла</h2>
+    <pre id="file-content"></pre>
+</div>
+
+<script>
+    const apiUrl = 'api.php';
+
+    // Загрузка репозиториев
+    $('#load-repos').on('click', function () {
+        const username = $('#username').val();
+        if (!username) {
+            alert('Введите GitHub username!');
+            return;
+        }
+
+        $.get(apiUrl, { action: 'get_repos', username: username }, function (data) {
+            const repos = JSON.parse(data);
+            $('#repos-list').empty();
+            $('#files-container').hide();
+            $('#file-content-container').hide();
+
+            if (repos.length) {
+                repos.forEach(repo => {
+                    $('#repos-list').append(
+                        `<li><a href="#" class="repo-link" data-repo="${repo.name}">${repo.name}</a></li>`
+                    );
+                });
+            } else {
+                $('#repos-list').html('<li>Репозитории не найдены.</li>');
+            }
+        });
+    });
+
+    // Загрузка файлов репозитория
+    $('#repos-list').on('click', '.repo-link', function (e) {
+        e.preventDefault();
+        const username = $('#username').val();
+        const repo = $(this).data('repo');
+
+        $.get(apiUrl, { action: 'get_files', username: username, repo: repo }, function (data) {
+            const files = JSON.parse(data);
+            $('#files-list').empty();
+            $('#files-container').show();
+            $('#file-content-container').hide();
+
+            files.forEach(file => {
+                if (file.name.endsWith('.md')) {
+                    $('#files-list').append(
+                        `<li><a href="#" class="file-link" data-repo="${repo}" data-file="${file.path}">${file.name}</a></li>`
+                    );
+                }
+            });
+        });
+    });
+
+    // Загрузка содержимого файла
+    $('#files-list').on('click', '.file-link', function (e) {
+        e.preventDefault();
+        const username = $('#username').val();
+        const repo = $(this).data('repo');
+        const file = $(this).data('file');
+
+        $.get(apiUrl, { action: 'get_file_content', username: username, repo: repo, file: file }, function (data) {
+            try {
+                const fileData = JSON.parse(data);
+                const decodedContent = fileData.content; // Декодирование Base64
+                $('#file-content').text(decodedContent); // Отображение содержимого
+                $('#file-content-container').show();
+            } catch (error) {
+                console.error("Error decoding content:", error);
+                $('#file-content').text("Ошибка при обработке файла.");
+            }
+        });
+    });
+</script>
+</body>
+</html>
